@@ -3,6 +3,9 @@
 //Incluindo dependencias
 const express = require("express");
 const bodyParser = require("body-parser");
+// const date = require(__dirname + "/date.js");
+const getDate = require('./date.js');
+
 
 //Iniciando Servidor
 const app = express();
@@ -14,29 +17,15 @@ let workItems = [];
 //Iniciando Templates ejs
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
 
 //Resposta padrão root
 app.get("/", function(req, res) {
 
-  //Armazena o dia da semana (numero de 0 a 6- Sabado)
-  let today = new Date(); //.getDay();
-
-  let options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  };
-
-  let day = today.toLocaleDateString("en-US", options);
-  res.render("list", {
-    listTitle: day,
-    items: items
-  });
+  let day = getDate();
+  res.render("list", {listTitle: day, items: items});
 
 });
 
