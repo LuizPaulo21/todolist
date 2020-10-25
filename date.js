@@ -1,10 +1,7 @@
 //jshint esversion:6
 
-module.exports = getDate;
-
-function getDate() {
-  
-let today = new Date();
+//Retorna a data completa
+exports.getDate = function() {
 
 let options = {
   weekday: "long",
@@ -12,8 +9,17 @@ let options = {
   month: "long"
 };
 
-let day = today.toLocaleDateString("en-US", options);
+let today = new Date();
 
-return day;
+return today.toLocaleDateString("en-US", options);
+}
+
+//Retorna o dia
+exports.getDay = function() {
+
+let today = new Date();
+let options = {weekday: "long"};
+
+return today.toLocaleDateString("en-US", options);
 
 }

@@ -4,15 +4,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 // const date = require(__dirname + "/date.js");
-const getDate = require('./date.js');
+const date = require('./date.js');
 
 
 //Iniciando Servidor
 const app = express();
 
 //Definindo variável para não causar erro de escopo
-let items = [];
-let workItems = [];
+const items = [];
+const workItems = [];
 
 //Iniciando Templates ejs
 app.set("view engine", "ejs");
@@ -24,11 +24,10 @@ app.use(express.static("public"));
 //Resposta padrão root
 app.get("/", function(req, res) {
 
-  let day = getDate();
+  let day = date.getDate();
   res.render("list", {listTitle: day, items: items});
 
 });
-
 
 //Lista de Trabalho
 app.get("/work", function(req, res){
